@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <header>
+      <!-- place navbar here -->
+    </header>
+    <main>
+      <div class="">
+        <div class="container mt-5">
+          <div class="row justify-content-md-center">
+            <div class="col-md-auto">
+              <div class="">
+                <h2>Add Students From</h2>
+                <form>
+                  <div class="form-group">
+                    <label for="usr">first_name:</label>
+                    <input type="text" class="form-control" id="first_name" />
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">last_name:</label>
+                    <input type="text" class="form-control" id="last_name" />
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd"> email:</label>
+                    <input type="email" class="form-control" id="email" />
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd"> phone_number:</label>
+                    <input type="text" class="form-control" id="phone_number" />
+                  </div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary mt-5"
+                    onclick="myFunction()"
+                  >
+                    Submit
+                  </button>
+                  <a class="btn btn-danger mt-5" href="/student" role="button">Back</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
+
+<script>
+  async function myFunction() {
+    // firstName, lastName, email, phoneNumber
+    const first_name = document.getElementById("first_name").value;
+    const last_name = document.getElementById("last_name").value;
+    const phone_number = document.getElementById("phone_number").value;
+    const email = document.getElementById("email").value;
+    const location = window.location.hostname;
+    const settings = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName: first_name,
+        lastName: last_name,
+        email: email,
+        phoneNumber: phone_number,
+      }),
+    };
+    try {
+      const fetchResponse = await fetch(
+        `http://${location}:3000/api/student/add`,
+        settings
+      );
+      if (fetchResponse.status == 200) {
+        console.log(200);
+        window.location.assign(`http://${location}:3000/student`);
+      } else {
+        alert("ลองดูอีกครั้ง");
+      }
+      //   console.log(fetchResponse);
+      //   const data = await fetchResponse.json();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+</script>

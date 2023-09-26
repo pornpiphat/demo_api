@@ -4,6 +4,7 @@ const db = require("../config/db");
 
 router.get("/", async (req, res) => {
   const result = await db.query(`SELECT * from students;`);
+  console.log(result);
   return res.status(200).json(result);
 });
 
@@ -18,6 +19,7 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/add", async (req, res) => {
+  console.log(req.body);
   const { firstName, lastName, email, phoneNumber } = req.body;
   await db.query(
     "INSERT INTO `demo`.`students` (`first_name`, `last_name`, `email`, `phone_number`) VALUES (?,?,?,?);",
